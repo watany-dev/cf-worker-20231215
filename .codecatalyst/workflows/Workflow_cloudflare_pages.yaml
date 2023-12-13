@@ -11,27 +11,22 @@ Triggers:
 # Required - Define action configurations.
 Actions:
   Build_69:
-    # Identifies the action. Do not modify this value.
     Identifier: aws/build@v1.0.0
-    # Specifies the source and/or artifacts to pass to the action as input.
     Inputs:
-      # Optional
       Sources:
-        - WorkflowSource # This specifies that the action requires this Workflow as a source
+        - WorkflowSource
     Outputs:
-      # Optional; Automatically discover reports for popular test frameworks
       AutoDiscoverReports:
         Enabled: true
-        # Use as prefix for the report files
         ReportNamePrefix: rpt
-    # Defines the action's properties.
     Configuration:
-      # Required - Steps are sequential instructions that run shell commands
       Steps:
         - Run: npm i -g bun
-        - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bunx i
-        - Run: export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
-        - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bunx run deploy
+        - Run: |
+            export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
+            cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages
+            bunx i
+            bunx run deploy
       Container:
         Registry: ECR
         Image: public.ecr.aws/docker/library/node:20
