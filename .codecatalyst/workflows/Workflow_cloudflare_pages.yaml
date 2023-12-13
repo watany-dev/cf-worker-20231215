@@ -28,6 +28,7 @@ Actions:
     Configuration:
       # Required - Steps are sequential instructions that run shell commands
       Steps:
+        - Run: npm i -g bun
         - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bunx i
         - Run: export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
         - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bunx run deploy
