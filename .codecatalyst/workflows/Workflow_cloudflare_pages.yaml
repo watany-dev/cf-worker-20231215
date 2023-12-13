@@ -25,8 +25,8 @@ Actions:
         - Run: |
             export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
             cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages
-            bun i
-            bun run deploy --project-name hono-pages-try
+            npm i
+            npm run deploy --project-name hono-pages-try
       Container:
         Registry: ECR
         Image: public.ecr.aws/docker/library/node:20
