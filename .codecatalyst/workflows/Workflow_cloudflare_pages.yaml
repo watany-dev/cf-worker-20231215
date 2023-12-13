@@ -21,7 +21,7 @@ Actions:
         ReportNamePrefix: rpt
     Configuration:
       Steps:
-        # - Run: npm i -g bun
+        - Run: npm i -g bun
         - Run: |
             export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
             cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages
