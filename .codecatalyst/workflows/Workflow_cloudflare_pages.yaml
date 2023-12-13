@@ -33,6 +33,6 @@ Actions:
         - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bunx run deploy
       Container:
         Registry: ECR
-        Image: public.ecr.aws/lambda/nodejs:20
+        Image: public.ecr.aws/docker/library/node:20
     Compute:
       Type: EC2
