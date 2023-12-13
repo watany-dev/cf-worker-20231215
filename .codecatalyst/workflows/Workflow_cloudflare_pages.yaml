@@ -25,8 +25,8 @@ Actions:
         - Run: |
             export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
             cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages
-            bunx i
-            bunx run deploy
+            bun i
+            bun run deploy
       Container:
         Registry: ECR
         Image: public.ecr.aws/docker/library/node:20
