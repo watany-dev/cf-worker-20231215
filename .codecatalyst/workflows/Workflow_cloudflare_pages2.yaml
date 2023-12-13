@@ -1,0 +1,32 @@
+Name: Workflow_cloudflare_pages2
+SchemaVersion: "1.0"
+
+# Optional - Set automatic triggers.
+Triggers:
+  - Type: Push
+    Branches:
+      - main
+      - dev
+
+# Required - Define action configurations.
+Actions:
+  Build_69:
+    Identifier: aws/build@v1.0.0
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Outputs:
+      AutoDiscoverReports:
+        Enabled: true
+        ReportNamePrefix: rpt
+    Configuration:
+      Steps:
+        - Run: npm i -g bun
+        - Run: export CLOUDFLARE_API_TOKEN=${Secrets.CLOUDFLARE_API_TOKEN}
+        - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bun install
+        - Run: cd $ACTION_BUILD_SOURCE_PATH_WorkflowSource/pages && bun run deploy --project-name hono-pages-try
+      Container:
+        Registry: ECR
+        Image: public.ecr.aws/docker/library/node:20
+    Compute:
+      Type: EC2
